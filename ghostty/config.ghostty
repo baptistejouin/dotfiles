@@ -1,0 +1,10 @@
+macos-icon="blueprint"
+theme="Github Dark Default"
+font-family="Hack Nerd Font Mono"
+cursor-style = "block"
+cursor-style-blink = false
+shell-integration-features = "no-cursor"
+
+keybind = unconsumed:ctrl+h=goto_split:left
+keybind = unconsumed:ctrl+l=goto_split:right
+keybind = global:ctrl+/=toggle_quick_terminal

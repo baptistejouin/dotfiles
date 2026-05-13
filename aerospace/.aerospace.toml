@@ -1,0 +1,141 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+start-at-login = true
+
+accordion-padding = 64
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = [{ monitor.secondary = 12 }, 0]
+outer.bottom = [{ monitor.secondary = 12 }, 0]
+outer.top = [{ monitor.secondary = 12 }, 0]
+outer.right = [{ monitor.secondary = 12 }, 0]
+
+[workspace-to-monitor-force-assignment]
+1 = 'secondary'
+2 = 'secondary'
+3 = 'secondary'
+4 = 'secondary'
+5 = 'secondary'
+6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+9 = 'secondary'
+
+q = 'main'
+w = 'main'
+e = 'main'
+r = 'main'
+t = 'main'
+y = 'main'
+
+[mode.main.binding]
+# ctrl-cmd-left = 'focus left'
+# ctrl-cmd-down = 'focus down'
+# ctrl-cmd-up = 'focus up'
+# ctrl-cmd-right = 'focus right'
+
+alt-shift-h = 'focus left --ignore-floating'
+alt-shift-j = 'focus down --ignore-floating'
+alt-shift-k = 'focus up --ignore-floating'
+alt-shift-l = 'focus right --ignore-floating'
+
+alt-f = ['layout floating tiling']
+alt-a = ['layout accordion horizontal vertical']
+alt-s = ['layout tiles horizontal vertical']
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+alt-tab = 'workspace-back-and-forth'
+# alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+#alt-space = 'focus toggle_tiling_floating'
+
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# alt-a = 'focus parent'
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+alt-q = 'workspace q'
+alt-w = 'workspace w'
+alt-e = 'workspace e'
+alt-r = 'workspace r'
+alt-t = 'workspace t'
+alt-y = 'workspace y'
+
+alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
+alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
+alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
+alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
+alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
+alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
+alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
+alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
+alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+
+alt-shift-q = 'move-node-to-workspace q --focus-follows-window'
+alt-shift-w = 'move-node-to-workspace w --focus-follows-window'
+alt-shift-e = 'move-node-to-workspace e --focus-follows-window'
+alt-shift-r = 'move-node-to-workspace r --focus-follows-window'
+alt-shift-t = 'move-node-to-workspace t --focus-follows-window'
+alt-shift-y = 'move-node-to-workspace y --focus-follows-window'
+
+# alt-r = 'mode resize'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace t --focus-follows-window'
+
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+if.window-title-regex-substring = '.*DevTools.*'
+run = ['layout floating', 'move-node-to-workspace 4 --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+if.window-title-regex-substring = '^(?!.*DevTools).*'
+run = ['move-node-to-workspace w --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.DanPristupov.Fork'
+run = ['layout floating', 'move-node-to-workspace r --focus-follows-window']
+check-further-callbacks = true
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace q --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace 2 --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = ['move-node-to-workspace 9 --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.usebruno.app'
+run = ['move-node-to-workspace 3 --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'org.pgadmin.pgadmin4'
+run = ['move-node-to-workspace 4 --focus-follows-window']
