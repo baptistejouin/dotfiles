@@ -1,41 +1,30 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+ # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-# end of NVM
+export PATH="$PATH:/usr/local/bin"
 
-# Created by `pipx` on 2025-03-25 11:51:55
-export PATH="$PATH:$HOME/.local/bin"
+# for git friendly, see: https://github.com/git-friendly/git-friendly
+export PATH=~/dev/git-friendly:$PATH
 
 # for python3
 export PATH="$HOME/.pyenv/shims:$PATH"
 
 # homebrew
 export PATH="$HOME/.homebrew/bin:$PATH"
-# eval "$(/opt/homebrew/bin/brew shellenv)"
 # end of homebrew
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# NVM (sourced after homebrew so its bin dir takes priority on PATH)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$HOME/.homebrew/opt/nvm/nvm.sh" ] && \. "$HOME/.homebrew/opt/nvm/nvm.sh"
+[ -s "$HOME/.homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOME/.homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# end of NVM
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=($HOME/.docker/completions $fpath)
+fpath=(/Users/baptistejouin/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
@@ -72,18 +61,45 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 # setopt cdablevars # > an argument to the cd builtin command that is not a directory is assumed to be the name of a variable whose value is the directory to change to.# end of history
 
-# Completions settings
+# Word boundaries for word-jump (Cmd+Left/Right, Alt+Left/Right, etc.)
+# Default WORDCHARS includes - and . which makes "search-service" one word.
+WORDCHARS=''
+
+#Completions settings
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 
+
+# Rebind clear-screen from Ctrl+L to Ctrl+; (Ctrl+L stays free for Ghostty split navigation)
+bindkey -r '^L'
+bindkey '\eC' clear-screen
 
 # Aliases
 alias ls='ls --color -la'
 alias vi='nvim'
 alias vim='nvim'
 alias ':q'='exit'
+alias reload='source ~/.zshrc'
+alias h='hx .'
+
+# custom utils
+alias config='$EDITOR ~/.zshrc'
+alias helix-config='$EDITOR ~/.config/helix/config.toml'
+alias aerospace-config='$EDITOR ~/.aerospace.toml'
+alias zellij-config='$EDITOR ~/.config/zellij/config.kdl'
+alias ghostty-config='$EDITOR "~/Library/Application Support/com.mitchellh.ghostty/config.ghostty"'
+
+alias c='claude'
+alias cr='claude --resume'
+alias z='zellij'
+alias za='zellij attach'
+
+alias noop='cd ~/noop'
+alias t='cd /tmp'
+alias w'cd ~/workflow'
 
 # variables
-export MYVIMRCFOLDER=~/.config/nvim
-export MYHELIXFOLDER=~/.config/helix
 export EDITOR=hx
-export MYZSHRC=~/.zshrc
+
+# cargo bin last, so a locally-built binary (e.g. git-master hx) outranks the homebrew one
+export PATH="$HOME/.cargo/bin:$PATH"
+
 

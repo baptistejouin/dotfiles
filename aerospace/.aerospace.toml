@@ -1,20 +1,43 @@
 # Reference: https://github.com/i3/i3/blob/next/etc/config
 
+config-version = 2
+
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-
 start-at-login = true
 
-accordion-padding = 64
+persistent-workspaces = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  'q',
+  'w',
+  'e',
+  'r',
+  't',
+  'y',
+]
+
+# after-startup-command = [
+#   'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+# ]
+
+accordion-padding = 48
 
 [gaps]
 inner.horizontal = 0
 inner.vertical = 0
-outer.left = [{ monitor.secondary = 12 }, 0]
-outer.bottom = [{ monitor.secondary = 12 }, 0]
-outer.top = [{ monitor.secondary = 12 }, 0]
-outer.right = [{ monitor.secondary = 12 }, 0]
+outer.left = [{ monitor.secondary = 128 }, 0]
+outer.bottom = [{ monitor.secondary = 32 }, 0]
+outer.top = [{ monitor.secondary = 32 }, 0]
+outer.right = [{ monitor.secondary = 448 }, 0]
 
 [workspace-to-monitor-force-assignment]
 1 = 'secondary'
@@ -26,7 +49,6 @@ outer.right = [{ monitor.secondary = 12 }, 0]
 7 = 'secondary'
 8 = 'secondary'
 9 = 'secondary'
-
 q = 'main'
 w = 'main'
 e = 'main'
@@ -35,19 +57,12 @@ t = 'main'
 y = 'main'
 
 [mode.main.binding]
-# ctrl-cmd-left = 'focus left'
-# ctrl-cmd-down = 'focus down'
-# ctrl-cmd-up = 'focus up'
-# ctrl-cmd-right = 'focus right'
+alt-shift-semicolon = 'mode layout'
 
-alt-shift-h = 'focus left --ignore-floating'
-alt-shift-j = 'focus down --ignore-floating'
-alt-shift-k = 'focus up --ignore-floating'
-alt-shift-l = 'focus right --ignore-floating'
-
-alt-f = ['layout floating tiling']
-alt-a = ['layout accordion horizontal vertical']
-alt-s = ['layout tiles horizontal vertical']
+alt-h = 'focus left --ignore-floating'
+alt-j = 'focus down --ignore-floating'
+alt-k = 'focus up --ignore-floating'
+alt-l = 'focus right --ignore-floating'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -70,7 +85,6 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
-
 alt-q = 'workspace q'
 alt-w = 'workspace w'
 alt-e = 'workspace e'
@@ -87,7 +101,6 @@ alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
 alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
 alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
-
 alt-shift-q = 'move-node-to-workspace q --focus-follows-window'
 alt-shift-w = 'move-node-to-workspace w --focus-follows-window'
 alt-shift-e = 'move-node-to-workspace e --focus-follows-window'
@@ -95,38 +108,62 @@ alt-shift-r = 'move-node-to-workspace r --focus-follows-window'
 alt-shift-t = 'move-node-to-workspace t --focus-follows-window'
 alt-shift-y = 'move-node-to-workspace y --focus-follows-window'
 
-# alt-r = 'mode resize'
+ctrl-shift-1 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 1'
+ctrl-shift-2 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 2'
+ctrl-shift-3 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 3'
+ctrl-shift-4 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 4'
+ctrl-shift-5 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 5'
+ctrl-shift-6 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 6'
+ctrl-shift-7 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 7'
+ctrl-shift-8 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 8'
+ctrl-shift-9 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 9'
+ctrl-shift-q = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh q'
+ctrl-shift-w = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh w'
+ctrl-shift-e = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh e'
+ctrl-shift-r = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh r'
+ctrl-shift-t = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh t'
+ctrl-shift-y = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh y'
 
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
+[mode.layout.binding]
+esc = ['mode main']
+
+r = ['flatten-workspace-tree', 'mode main']               # reset layout
+f = ['layout floating tiling', 'mode main']               # floating layout
+a = ['layout accordion horizontal vertical', 'mode main'] # accordion layout
+v = ['layout tiles horizontal vertical', 'mode main']     # split layout
+j = ['join-with left']
+
+# [[on-window-detected]]
+# if.app-id = 'com.apple.finder'
+# run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace t --focus-follows-window'
+run = 'move-node-to-workspace r --focus-follows-window'
 
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
 if.window-title-regex-substring = '.*DevTools.*'
-run = ['layout floating', 'move-node-to-workspace 4 --focus-follows-window']
+run = ['layout floating', 'move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
 if.window-title-regex-substring = '^(?!.*DevTools).*'
-run = ['move-node-to-workspace w --focus-follows-window']
+run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = ['layout floating', 'move-node-to-workspace r --focus-follows-window']
-check-further-callbacks = true
+run = ['layout floating', 'move-node-to-workspace e --focus-follows-window']
+check-further-callbacks = true                                               # fork use the native tab support of apple and they are not support as i expect (see the open issue)
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace q --focus-follows-window']
+check-further-callbacks = true                            # huddle window are by default flow (i dont want this)
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 2 --focus-follows-window']
+run = ['move-node-to-workspace w --focus-follows-window']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
@@ -135,7 +172,3 @@ run = ['move-node-to-workspace 9 --focus-follows-window']
 [[on-window-detected]]
 if.app-id = 'com.usebruno.app'
 run = ['move-node-to-workspace 3 --focus-follows-window']
-
-[[on-window-detected]]
-if.app-id = 'org.pgadmin.pgadmin4'
-run = ['move-node-to-workspace 4 --focus-follows-window']

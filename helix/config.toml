@@ -1,14 +1,26 @@
-theme = "github_dark"
+theme = "material_deep_ocean_edited"
+# theme = "zed_onelight"
 
 [editor]
 line-number = "relative"
 color-modes = true
+cursorline = true
+bufferline = "always"
 
 [editor.soft-wrap]
 enable = true
 
 [editor.statusline]
-left = ["mode", "file-name", "file-modification-indicator", "spacer", "spinner"]
+left = [
+  "mode",
+  "spacer",
+  "separator",
+  "file-name",
+  "file-modification-indicator",
+  "spacer",
+  "spinner",
+]
+separator = " ⁙ "
 center = []
 right = [
   "diagnostics",
@@ -16,16 +28,50 @@ right = [
   "position",
   "file-type",
   "version-control",
-  "spacer",
 ]
 
-[keys.normal]
-C-h = "jump_view_left"
-C-l = "jump_view_right"
-C-j = "jump_view_down"
-C-k = "jump_view_down"
-C-b = ":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"
-
 [editor.inline-diagnostics]
-cursor-line = "warning" # minimum severity that a diagnostic must have to be shown inline on the line that contains the primary cursor
+cursor-line = "warning"
 max-wrap = 20
+
+[keys.normal]
+e = ["move_next_word_end", "trim_selections"]
+b = ["move_prev_word_start", "trim_selections"]
+w = "@lbe"
+X = "extend_line_above"
+C-u = ["page_cursor_half_up", "align_view_center"]
+C-d = ["page_cursor_half_down", "align_view_center"]
+g.q = ":buffer-close"
+C-k = "@5k"
+C-j = "@5j"
+C-r = ":rl"
+up = "@5k"
+down = "@5j"
+# used for terminal multiplexer
+C-b = "no_op"
+"["."[" = "@maf<A-;>;"
+"]"."]" = "@maf;"
+
+[keys.normal.space]
+"!" = ":config-reload"
+
+[keys.select]
+up = "@5k"
+down = "@5j"
+C-k = "@5k"
+C-j = "@5j"
+
+[keys.normal.backspace]
+backspace = "suspend"
+y = ":yank-diagnostic"
+o = ":sh open $(realpath %{buffer_name}) -R"
+P = ":sh echo $(realpath %{buffer_name}) | pbcopy"
+p = ":sh echo %{buffer_name} | pbcopy"
+b = ":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name} | awk '{print $1}' | xargs git log -1 --format='%%h | %%ad | %%ae: %%s' --date=format:'%%Y-%%m-%%d %%H:%%M'"
+B = ":sh git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | head -1 | awk '{print $1}' | xargs gh browse"
+l = ":sh echo %{buffer_name}:%{cursor_line} | pbcopy"
+L = ":sh gh browse -c -n %{buffer_name}:%{cursor_line} | pbcopy"
+
+[keys.select.backspace]
+l = ":sh echo %{buffer_name}:%{selection_line_start}-%{selection_line_end} | pbcopy"
+L = ":sh gh browse -c -n %{buffer_name}:%{selection_line_start}-%{selection_line_end} | pbcopy"

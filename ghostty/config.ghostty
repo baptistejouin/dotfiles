@@ -1,10 +1,20 @@
-macos-icon="blueprint"
-theme="Github Dark Default"
-font-family="Hack Nerd Font Mono"
-cursor-style = "block"
+config-file = ?auto/theme.ghostty
+
+font-family = "Hack Nerd Font Mono"
+cursor-style = block
 cursor-style-blink = false
 shell-integration-features = "no-cursor"
+cursor-color = cell-foreground
+cursor-text = cell-background
 
 keybind = unconsumed:ctrl+h=goto_split:left
 keybind = unconsumed:ctrl+l=goto_split:right
-keybind = global:ctrl+/=toggle_quick_terminal
+keybind = cmd+enter=ignore
+keybind = cmd+t=unbind
+keybind = ctrl+semicolon=text:\x1bC
+# 
+# replace the clean terminal keybind from ctrl+l to ctrl+;
+keybind = shift+enter=text:\x1b\r
+keybind = ctrl+space=text:\x00
+
+macos-option-as-alt = left
