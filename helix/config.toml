@@ -47,13 +47,13 @@ C-j = "@5j"
 C-r = ":rl"
 up = "@5k"
 down = "@5j"
-# used for terminal multiplexer
-C-b = "no_op"
+C-b = "no_op"                                        # used for terminal multiplexer
 "["."[" = "@maf<A-;>;"
 "]"."]" = "@maf;"
 
 [keys.normal.space]
 "!" = ":config-reload"
+# add a custom for :rla
 
 [keys.select]
 up = "@5k"

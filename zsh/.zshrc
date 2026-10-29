@@ -43,6 +43,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+# zinit light Multirious/zsh-helix-mode
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -68,9 +69,22 @@ WORDCHARS=''
 #Completions settings
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 
 
-# Rebind clear-screen from Ctrl+L to Ctrl+; (Ctrl+L stays free for Ghostty split navigation)
-bindkey -r '^L'
+# Rebind clear-screen from Ctrl+L to Ctrl+; and use Ctrl+L to accept the zsh-autosuggestions suggestion
+bindkey '^L' autosuggest-accept
 bindkey '\eC' clear-screen
+
+# Karabiner maps CapsLock+L/H to Option+Right/Left (\e[1;3C / \e[1;3D):
+# accept the suggestion if one is shown at end of line, otherwise jump a word
+_accept-or-forward-word() {
+  if [[ -n $POSTDISPLAY && $CURSOR -eq ${#BUFFER} ]]; then
+    zle autosuggest-accept
+  else
+    zle forward-word
+  fi
+}
+zle -N _accept-or-forward-word
+bindkey '\e[1;3C' _accept-or-forward-word
+bindkey '\e[1;3D' backward-word
 
 # Aliases
 alias ls='ls --color -la'
@@ -91,10 +105,12 @@ alias c='claude'
 alias cr='claude --resume'
 alias z='zellij'
 alias za='zellij attach'
+alias git-prune-gone="git branch -vv | awk '/: gone]/{print \$1}' | xargs -r git branch -D"
 
 alias noop='cd ~/noop'
-alias t='cd /tmp'
-alias w'cd ~/workflow'
+alias temp='cd /tmp'
+alias w='cd ~/workflow'
+alias tsfmt='biome format --stdin-file-path=x.ts'
 
 # variables
 export EDITOR=hx

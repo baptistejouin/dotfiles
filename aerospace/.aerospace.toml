@@ -8,23 +8,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = ['exec-and-forget ~/.config/aerospace/ghostty-focus-mode.sh']
 start-at-login = true
 
-persistent-workspaces = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  'q',
-  'w',
-  'e',
-  'r',
-  't',
-  'y',
-]
+persistent-workspaces = ['1', '2', '3', '9', '0', 'q', 'w', 'e']
 
 # after-startup-command = [
 #   'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
@@ -44,18 +28,11 @@ outer.right = [{ monitor.secondary = 448 }, 0]
 1 = 'secondary'
 2 = 'secondary'
 3 = 'secondary'
-4 = 'secondary'
-5 = 'secondary'
-6 = 'secondary'
-7 = 'secondary'
-8 = 'secondary'
 9 = 'secondary'
+0 = 'secondary'
 q = 'main'
 w = 'main'
 e = 'main'
-r = 'main'
-t = 'main'
-y = 'main'
 
 [mode.main.binding]
 alt-shift-semicolon = 'mode layout'
@@ -80,50 +57,29 @@ alt-tab = 'workspace-back-and-forth'
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 0'
 alt-q = 'workspace q'
 alt-w = 'workspace w'
 alt-e = 'workspace e'
-alt-r = 'workspace r'
-alt-t = 'workspace t'
-alt-y = 'workspace y'
 
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
 alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
 alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
-alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
-alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
-alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
-alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
 alt-shift-q = 'move-node-to-workspace q --focus-follows-window'
 alt-shift-w = 'move-node-to-workspace w --focus-follows-window'
 alt-shift-e = 'move-node-to-workspace e --focus-follows-window'
-alt-shift-r = 'move-node-to-workspace r --focus-follows-window'
-alt-shift-t = 'move-node-to-workspace t --focus-follows-window'
-alt-shift-y = 'move-node-to-workspace y --focus-follows-window'
 
 ctrl-shift-1 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 1'
 ctrl-shift-2 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 2'
 ctrl-shift-3 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 3'
-ctrl-shift-4 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 4'
-ctrl-shift-5 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 5'
-ctrl-shift-6 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 6'
-ctrl-shift-7 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 7'
-ctrl-shift-8 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 8'
 ctrl-shift-9 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 9'
+ctrl-shift-0 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 0'
 ctrl-shift-q = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh q'
 ctrl-shift-w = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh w'
 ctrl-shift-e = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh e'
-ctrl-shift-r = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh r'
-ctrl-shift-t = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh t'
-ctrl-shift-y = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh y'
 
 [mode.layout.binding]
 esc = ['mode main']
@@ -140,7 +96,7 @@ j = ['join-with left']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace r --focus-follows-window'
+run = 'move-node-to-workspace 9 --focus-follows-window'
 
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
@@ -158,13 +114,12 @@ run = ['layout floating', 'move-node-to-workspace e --focus-follows-window']
 check-further-callbacks = true                                               # fork use the native tab support of apple and they are not support as i expect (see the open issue)
 
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace q --focus-follows-window']
-check-further-callbacks = true                            # huddle window are by default flow (i dont want this)
-
-[[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace w --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.usebruno.app'
+run = ['move-node-to-workspace 3 --focus-follows-window']
 
 [mode.ghostty.binding]
 # alt-hjkl intentionally left unbound so Ghostty receives them
@@ -175,57 +130,28 @@ alt-tab = 'workspace-back-and-forth'
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 0'
 
 alt-q = 'workspace q'
 alt-w = 'workspace w'
 alt-e = 'workspace e'
-alt-r = 'workspace r'
-alt-t = 'workspace t'
-alt-y = 'workspace y'
 
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
 alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
 alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
-alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
-alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
-alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
-alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
 
 alt-shift-q = 'move-node-to-workspace q --focus-follows-window'
 alt-shift-w = 'move-node-to-workspace w --focus-follows-window'
 alt-shift-e = 'move-node-to-workspace e --focus-follows-window'
-alt-shift-r = 'move-node-to-workspace r --focus-follows-window'
-alt-shift-t = 'move-node-to-workspace t --focus-follows-window'
-alt-shift-y = 'move-node-to-workspace y --focus-follows-window'
 
 ctrl-shift-1 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 1'
 ctrl-shift-2 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 2'
 ctrl-shift-3 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 3'
-ctrl-shift-4 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 4'
-ctrl-shift-5 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 5'
-ctrl-shift-6 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 6'
-ctrl-shift-7 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 7'
-ctrl-shift-8 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 8'
 ctrl-shift-9 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 9'
+ctrl-shift-0 = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh 0'
 ctrl-shift-q = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh q'
 ctrl-shift-w = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh w'
 ctrl-shift-e = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh e'
-ctrl-shift-r = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh r'
-ctrl-shift-t = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh t'
-ctrl-shift-y = 'exec-and-forget ~/.config/aerospace/move-focused-app-to-workspace.sh y'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace 9 --focus-follows-window']
-
-[[on-window-detected]]
-if.app-id = 'com.usebruno.app'
-run = ['move-node-to-workspace 3 --focus-follows-window']
